@@ -1,25 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-   name: myapp-deployment
-   labels:
-     app: my-app
-     tier: forntend
+  name: myapp-deployment
+  labels:
+    app: my-app
+    tier: frontend 
 spec:
-   template:
-     metadata:
-       name: myapp-pod
-       labels:
-          app: myapp
-          type: fornt-end
-      spec:
-        containers:
-        - name: nginx-container
-          image: nginx:latest
-replicas: 3
-selector:
-  matchLabels:
-    type: fornt-end
+  replicas: 3 
+  selector:
+    matchLabels:
+      app: myapp  
+  template:
+    metadata:
+      labels:
+        app: myapp
+        type: frontend  
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80  
+
 
 
 kubectl apply -f deployment-defination.yml
